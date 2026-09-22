@@ -1,225 +1,92 @@
-````markdown
-# 🔐 RSA Key Distribution for Secure Chat
+# 🔐 RSA Encryption Visualizer & Guided Cryptography Lab
 
-An interactive Cryptography Virtual Laboratory developed using Python and Streamlit to demonstrate RSA key generation, public-key distribution, message encryption, and decryption.
+An interactive, web-based Cryptography Virtual Laboratory built with **Python** and **Streamlit** to visualize RSA key generation, public key distribution, step-by-step message encryption, network transmission, and private key decryption.
 
-## 📌 Project Overview
+---
 
-This project implements RSA Key Distribution for Secure Chat.
+## 📌 Features & Highlights
 
-The application allows users to:
+- 🧭 **Guided 4-Step Experience Flow**: Learn and inspect RSA concepts one focused section at a time without visual clutter.
+- 🔑 **Key Generation & Parameter Setup**: Interactive prime selection ($p, q$) and exponent selection ($e$) with preset small/standard prime buttons.
+- 🔀 **Visual Transformation Pipeline**: Dynamic 5-stage transformation diagram showing Plaintext $\to$ ASCII $\to$ RSA Encryption $\to$ Transmission $\to$ RSA Decryption $\to$ Recovered Message.
+- 🎮 **Interactive Stepper Animation Controls**: Step forward, step backward, and **Auto Play / Pause** auto-stepper with configurable playback speeds.
+- 🖥️ **Side-by-Side Workstation**: Real-time side-by-side terminal views for **Sender (Encryption)** and **Receiver (Decryption)** with KaTeX math rendering.
+- 📊 **Complete Transformation Matrix**: Comprehensive execution table tracking every character's journey with automated integrity verification (`🎉 Message Integrity Verified`).
 
-- Enter RSA parameters
-- Generate public and private keys
-- Visualize public-key distribution
-- Enter a message
-- Encrypt the message using the receiver's public key
-- Visualize the encryption process
-- Transmit the encrypted ciphertext
-- Decrypt the message using the receiver's private key
-- Visualize the complete RSA communication process
+---
 
-## 🎯 Objective
+## 🧭 The 4-Step Guided Experience
 
-The objective of this project is to demonstrate how RSA public-key cryptography can be used for secure communication between a sender and receiver.
+1. **🔑 Step 1: Key Generation & Setup**
+   - Configure prime numbers $p$ and $q$, and public exponent $e$.
+   - Derives modulus $n = p \times q$, totient $\phi(n) = (p-1)(q-1)$, Public Key $(e,n)$, and Private Key $(d,n)$.
 
-## 🛠️ Technologies Used
+2. **💬 Step 2: Message Input & Encryption**
+   - Input custom plaintext message.
+   - View character ASCII numerical representation array and generated network ciphertext array.
 
-- Python 3
-- Streamlit
-- Python Standard Library
-- HTML/CSS
+3. **🧪 Step 3: Interactive Stepper Visualizer**
+   - Step character-by-character through the encryption and decryption pipeline.
+   - Play/Pause timer auto-stepper.
+   - Side-by-side Sender & Receiver terminal cards displaying active character math and accumulating payload streams.
 
-## 🔑 RSA Algorithm
+4. **📊 Step 4: Full Summary Matrix & Verification**
+   - End-to-end transformation summary table for all characters.
+   - Live integrity verification badge.
 
-RSA uses two keys:
+---
 
-- **Public Key** — can be shared with others
-- **Private Key** — must be kept secret
+## 🔑 RSA Algorithm Reference
 
-### Key Generation
+### Key Derivation
+- Select primes $p$ and $q$.
+- Compute Modulus: $$n = p \times q$$
+- Compute Euler's Totient: $$\phi(n) = (p-1)(q-1)$$
+- Select Public Exponent $e$ such that: $$\gcd(e, \phi(n)) = 1$$
+- Compute Private Exponent $d$ using modular inverse: $$d \times e \equiv 1 \pmod{\phi(n)}$$
 
-Two prime numbers `p` and `q` are selected.
+### Keys
+- **Public Key**: $(e, n)$
+- **Private Key**: $(d, n)$
 
-```text
-n = p × q
-````
+### Encryption & Decryption
+- **Encryption**: $$c = m^e \bmod n$$
+- **Decryption**: $$m = c^d \bmod n$$
 
-Euler's Totient is calculated as:
+---
 
-```text
-φ(n) = (p − 1)(q − 1)
-```
+## 🛠️ Tech Stack
 
-The public exponent `e` is selected such that:
+- **Python 3.10+**
+- **Streamlit** (Web Application Framework)
+- **KaTeX / LaTeX** (Mathematical Formula Rendering)
+- **HTML5 / Custom CSS3** (Spacious UI Layout & Styling)
 
-```text
-gcd(e, φ(n)) = 1
-```
+---
 
-The private exponent `d` is calculated using:
+## ▶️ Getting Started
 
-```text
-d × e ≡ 1 (mod φ(n))
-```
-
-### Public Key
-
-```text
-(e, n)
-```
-
-### Private Key
-
-```text
-(d, n)
-```
-
-## 🔒 Encryption
-
-The sender encrypts the message using the receiver's public key.
-
-```text
-c = mᵉ mod n
-```
-
-## 🔓 Decryption
-
-The receiver decrypts the ciphertext using the private key.
-
-```text
-m = cᵈ mod n
-```
-
-## 🔄 Secure Chat Workflow
-
-```text
-             RSA SECURE CHAT
-
-        ┌─────────────────────┐
-        │      RECEIVER       │
-        │                     │
-        │   Generate Keys     │
-        └──────────┬──────────┘
-                   │
-                   │ Public Key
-                   ▼
-        ┌─────────────────────┐
-        │       SENDER        │
-        │                     │
-        │   Enter Message     │
-        └──────────┬──────────┘
-                   │
-                   │ Encrypt
-                   ▼
-        ┌─────────────────────┐
-        │     CIPHERTEXT      │
-        │                     │
-        │ Secure Transmission │
-        └──────────┬──────────┘
-                   │
-                   ▼
-        ┌─────────────────────┐
-        │      RECEIVER       │
-        │                     │
-        │    Private Key      │
-        └──────────┬──────────┘
-                   │
-                   │ Decrypt
-                   ▼
-        ┌─────────────────────┐
-        │  ORIGINAL MESSAGE   │
-        └─────────────────────┘
-```
-
-## ✨ Features
-
-### 🔑 RSA Key Generation
-
-Users can provide prime numbers `p`, `q`, and public exponent `e` to generate the RSA key pair.
-
-### 🔓 Public Key Distribution
-
-The receiver shares the public key with the sender while keeping the private key secret.
-
-### 💬 Secure Chat
-
-Users can enter a message and encrypt it using the generated public key.
-
-### 🔒 Encryption Visualization
-
-The application displays:
-
-1. Original message
-2. Character-to-ASCII conversion
-3. RSA encryption formula
-4. Encrypted ciphertext
-5. Secure transmission
-
-### 🔓 Decryption Visualization
-
-The application displays:
-
-1. Received ciphertext
-2. Private key
-3. RSA decryption formula
-4. Recovered original message
-
-### 📐 Mathematical Visualization
-
-The application displays the important RSA calculations and formulas.
-
-### 🔄 Reset Laboratory
-
-The experiment can be reset and performed again with different inputs.
-
-## 📂 Project Structure
-
-```text
-rsa-encryption-visualizer/
-│
-├── app.py
-│
-└── README.md
-```
-
-## ⚙️ Installation
-
-### 1. Clone the Repository
-
+### 1. Clone & Navigate
 ```bash
 git clone <repository-url>
-```
-
-### 2. Open the Project Folder
-
-```bash
 cd rsa-encryption-visualizer
 ```
 
-### 3. Install Streamlit
-
+### 2. Install Dependencies
 ```bash
 pip install streamlit
 ```
 
-## ▶️ Running the Application
-
-Run the application using:
-
+### 3. Run the App
 ```bash
 python -m streamlit run app.py
 ```
 
-The application will be available at:
+Open your browser at `http://localhost:8501`.
 
-```text
-http://localhost:8501
-```
+---
 
-## 🧪 Example
-
-Use the following values:
+## 🧪 Example Test Values
 
 ```text
 p = 61
@@ -227,59 +94,27 @@ q = 53
 e = 17
 ```
 
-The application calculates:
-
+Derived parameters:
 ```text
 n = 3233
 φ(n) = 3120
+Public Key = (17, 3233)
+Private Key = (2753, 3233)
 ```
 
-Public Key:
+Example message: `"HELLO RSA"` $\to$ Character-by-character modular transformation verified automatically.
 
-```text
-(17, 3233)
-```
-
-Private Key:
-
-```text
-(2753, 3233)
-```
-
-A message can then be entered, encrypted using the public key, transmitted as ciphertext, and decrypted using the private key.
+---
 
 ## 🎓 Learning Outcomes
 
-After completing this virtual laboratory, students will be able to:
+- Understand public-key asymmetric cryptography concepts.
+- Learn RSA key generation, modular arithmetic, and inverse calculations.
+- Visualize encryption/decryption transformations step-by-step.
+- Verify message integrity over simulated transmission.
 
-* Understand the basic working of RSA.
-* Generate RSA public and private keys.
-* Understand RSA key distribution.
-* Differentiate between public and private keys.
-* Encrypt messages using RSA.
-* Decrypt RSA ciphertext.
-* Understand the mathematical calculations involved in RSA.
-* Visualize secure communication between a sender and receiver.
+---
 
-## ⚠️ Educational Purpose
+## ⚠️ Educational Note
 
-This project is intended for educational and demonstration purposes.
-
-The implementation uses textbook RSA so that the mathematical operations and encryption/decryption process can be easily visualized. It is not intended for production-grade secure messaging.
-
-## 👨‍💻 Project Information
-
-**Project Title:** RSA Key Distribution for Secure Chat
-
-**Type:** Cryptography Virtual Laboratory
-
-**Algorithm:** RSA (Rivest–Shamir–Adleman)
-
-**Programming Language:** Python
-
-**Framework:** Streamlit
-
-**Application Type:** Web-Based Interactive Laboratory
-
-```
-```
+This virtual lab uses textbook RSA for educational visualization and mathematical clarity. It is designed for teaching and learning cryptography concepts.
