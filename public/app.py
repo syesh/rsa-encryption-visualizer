@@ -12,6 +12,37 @@ if hasattr(sys.stderr, "buffer") and (sys.stderr.encoding is None or sys.stderr.
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 # ============================================================
+# VERCEL SERVERLESS COMPATIBILITY ENTRYPOINT
+# ============================================================
+
+def app(environ, start_response):
+    """
+    WSGI callable for Vercel Serverless Function runtime.
+    Serves index.html or raw static assets like app.py.
+    """
+    import os
+    path = environ.get("PATH_INFO", "/")
+
+    if path == "/app.py":
+        curr_file = os.path.abspath(__file__)
+        if os.path.exists(curr_file):
+            with open(curr_file, "rb") as f:
+                data = f.read()
+            start_response("200 OK", [("Content-Type", "text/plain; charset=utf-8")])
+            return [data]
+
+    # Serve index.html for all other routes
+    html_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
+    if os.path.exists(html_file):
+        with open(html_file, "rb") as f:
+            data = f.read()
+        start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
+        return [data]
+
+    start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
+    return [b"<!DOCTYPE html><html><body><h1>RSA Visualizer</h1></body></html>"]
+
+# ============================================================
 # PAGE CONFIGURATION
 # ============================================================
 
