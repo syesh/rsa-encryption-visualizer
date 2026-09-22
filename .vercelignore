@@ -1,8 +1,4 @@
-# Ignore root Python entrypoint & requirements from triggering Vercel Serverless Function build
-/app.py
-requirements.txt
-
-# Environment & cache
+# Ignore python environment & caches
 .venv
 __pycache__
 *.pyc
