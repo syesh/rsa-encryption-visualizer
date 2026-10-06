@@ -520,42 +520,46 @@ bit_len = n_val.bit_length() if n_val > 0 else 0
 
 with st.sidebar:
     st.markdown("""
-    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-        <span style="font-size: 24px;">🔐</span>
-        <div>
-            <div style="font-size: 16px; font-weight: 800; color: #f8fafc; letter-spacing: -0.015em;">RSA Lab Control</div>
-            <div style="font-size: 12px; color: #94a3b8;">Cryptographic State</div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 24px;">🔐</span>
+            <div>
+                <div style="font-size: 15px; font-weight: 800; color: #f8fafc; letter-spacing: -0.015em;">RSA Lab Control</div>
+                <div style="font-size: 11px; color: #94a3b8;">Cryptographic Console</div>
+            </div>
         </div>
+        <span class="badge-pill badge-emerald">Active</span>
     </div>
     """, unsafe_allow_html=True)
     
     st.divider()
 
+    # Active State Summary Card
     with st.container(border=True):
-        st.markdown('<span class="badge-pill badge-indigo">Active State</span>', unsafe_allow_html=True)
+        st.markdown('<span class="badge-pill badge-indigo">Active Key State</span>', unsafe_allow_html=True)
         st.markdown(f"""
-        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; margin-top: 8px;">
-            <div style="display: flex; justify-content: space-between;">
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; margin-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Primes (p, q):</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f8fafc;">{p_val}, {q_val}</span>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Modulus n:</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #818cf8;">{n_val}</span>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Totient φ(n):</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #818cf8;">{phi_val}</span>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Public Key (e, n):</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #818cf8;">({e_val}, {n_val})</span>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Private Key (d, n):</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #34d399;">({d_val if d_val else 'Invalid'}, {n_val})</span>
             </div>
-            <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8;">Bit Length:</span>
                 <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #c084fc;">{bit_len} bits</span>
             </div>
@@ -564,23 +568,46 @@ with st.sidebar:
 
     st.markdown('<div class="spacer-sm"></div>', unsafe_allow_html=True)
 
+    # Key Presets Toolbar
     with st.container(border=True):
-        st.markdown('<span class="badge-pill badge-purple">Quick Presets</span>', unsafe_allow_html=True)
-        st.markdown("<div style='font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-top: 6px; margin-bottom: 8px;'>Load Key Preset</div>", unsafe_allow_html=True)
+        st.markdown('<span class="badge-pill badge-purple">Key Presets</span>', unsafe_allow_html=True)
+        st.markdown("<div style='font-size: 12px; font-weight: 700; color: #f8fafc; margin-top: 6px; margin-bottom: 8px;'>Load Prime Configuration</div>", unsafe_allow_html=True)
         
-        c_pr1, c_pr2 = st.columns(2)
-        with c_pr1:
-            st.button("🎲 Small\n(11, 13)", use_container_width=True, key="sb_p1", on_click=apply_preset, args=(11, 13, 7))
-        with c_pr2:
-            st.button("🚀 Standard\n(61, 53)", use_container_width=True, key="sb_p2", on_click=apply_preset, args=(61, 53, 17))
-        
+        st.button("🎲 Small (11, 13, e=7)", use_container_width=True, key="sb_p1", on_click=apply_preset, args=(11, 13, 7))
+        st.button("🚀 Standard (61, 53, e=17)", use_container_width=True, key="sb_p2", on_click=apply_preset, args=(61, 53, 17))
         st.button("🛡️ Medium (101, 103, e=7)", use_container_width=True, key="sb_p3", on_click=apply_preset, args=(101, 103, 7))
+        st.button("⚡ Fast (137, 149, e=7)", use_container_width=True, key="sb_p4", on_click=apply_preset, args=(137, 149, 7))
+        st.button("🔒 Large (257, 263, e=65537)", use_container_width=True, key="sb_p5", on_click=apply_preset, args=(257, 263, 65537))
 
-    with st.expander("ℹ️ Security & Bit Size Note"):
+    st.markdown('<div class="spacer-sm"></div>', unsafe_allow_html=True)
+
+    # Quick Message Switcher Toolbar
+    with st.container(border=True):
+        st.markdown('<span class="badge-pill badge-amber">Quick Message</span>', unsafe_allow_html=True)
+        st.markdown("<div style='font-size: 12px; font-weight: 700; color: #f8fafc; margin-top: 6px; margin-bottom: 8px;'>Select Test Message</div>", unsafe_allow_html=True)
+        
+        sb_c1, sb_c2 = st.columns(2)
+        with sb_c1:
+            st.button("💬 'HELLO RSA'", use_container_width=True, key="sb_m1", on_click=apply_msg_preset, args=("HELLO RSA",))
+            st.button("💬 'TOP SECRET'", use_container_width=True, key="sb_m3", on_click=apply_msg_preset, args=("TOP SECRET",))
+        with sb_c2:
+            st.button("💬 'CRYPTO 101'", use_container_width=True, key="sb_m2", on_click=apply_msg_preset, args=("CRYPTO 101",))
+            st.button("💬 '42'", use_container_width=True, key="sb_m4", on_click=apply_msg_preset, args=("42",))
+
+    st.markdown('<div class="spacer-sm"></div>', unsafe_allow_html=True)
+
+    # Security Information Note Expander
+    with st.expander("ℹ️ RSA Security & Bit Size Notes"):
         st.markdown(f"""
-        **Educational RSA:**
-        - Modulus: **{bit_len} bits** (`n = {n_val}`)
-        - Production RSA: **2048 - 4096 bits** with OAEP.
+        **Lab Configuration:**
+        - Active Modulus: **{bit_len} bits** (`n = {n_val}`)
+        - Euler Totient: `φ(n) = {phi_val}`
+        
+        ---
+        **Production Standards:**
+        - Modulus Size: **2048 - 4096 bits**
+        - Key Generation: Uses CSPRNG prime generators.
+        - Padding: Requires **RSA-OAEP** or **PSS** to prevent attack vectors.
         """)
 
 
