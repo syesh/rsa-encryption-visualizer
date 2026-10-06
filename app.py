@@ -378,6 +378,81 @@ div[data-baseweb="tab-highlight"] {
     background-color: #6366f1 !important;
 }
 
+/* Responsive Mobile Adjustments (< 768px) */
+@media (max-width: 768px) {
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 2.5rem !important;
+        padding-left: 0.6rem !important;
+        padding-right: 0.6rem !important;
+    }
+    
+    .exp-header {
+        padding: 18px 16px !important;
+        border-radius: 12px !important;
+        margin-bottom: 14px !important;
+    }
+    
+    .exp-header h1 {
+        font-size: 20px !important;
+        gap: 8px !important;
+    }
+    
+    .exp-header p {
+        font-size: 12.5px !important;
+    }
+    
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 14px 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Pipeline Step Flow Bar for Mobile */
+    .pipeline-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+        padding: 12px !important;
+        margin: 12px 0 !important;
+    }
+
+    .pipeline-step {
+        width: 100% !important;
+        padding: 8px 10px !important;
+        font-size: 11.5px !important;
+    }
+
+    .pipeline-separator {
+        transform: rotate(90deg);
+        text-align: center;
+        margin: 2px 0;
+    }
+
+    /* Tabs formatting on mobile */
+    button[data-baseweb="tab"] {
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+    }
+
+    /* Code boxes font size for mobile */
+    .code-box, .code-box-dec {
+        font-size: 12px !important;
+        padding: 10px 12px !important;
+    }
+
+    /* Streamlit columns spacing on mobile */
+    div[data-testid="stHorizontalBlock"] {
+        gap: 0.5rem !important;
+    }
+    
+    /* Buttons size on mobile */
+    .stButton > button {
+        font-size: 12px !important;
+        padding: 0.45rem 0.6rem !important;
+    }
+}
+
 /* Micro Spacing Utilities */
 .spacer-sm { height: 10px; }
 .spacer-md { height: 18px; }
