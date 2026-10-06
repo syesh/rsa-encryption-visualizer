@@ -4,6 +4,13 @@ An interactive, web-based Cryptography Virtual Laboratory built with **Python** 
 
 ---
 
+## 📊 Presentation & Project Documentation
+For presentation slide decks, project architecture details, and code explanations, see:
+- 📖 [PRESENTATION.md](PRESENTATION.md) – Quick presentation slide outline & demo script.
+- 📚 [docs/PRESENTATION_DOCS.md](docs/PRESENTATION_DOCS.md) – Full technical presentation documentation & file structure breakdown.
+
+---
+
 ## 📌 Features & Highlights
 
 - 🧭 **Guided 4-Step Experience Flow**: Learn and inspect RSA concepts one focused section at a time without visual clutter.
