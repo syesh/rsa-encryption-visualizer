@@ -110,18 +110,3 @@ Private Key = (2753, 3233)
 ```
 
 Example message: `"HELLO RSA"` $\to$ Character-by-character modular transformation verified automatically.
-
----
-
-## 🎓 Learning Outcomes
-
-- Understand public-key asymmetric cryptography concepts.
-- Learn RSA key generation, modular arithmetic, and inverse calculations.
-- Visualize encryption/decryption transformations step-by-step.
-- Verify message integrity over simulated transmission.
-
----
-
-## ⚠️ Educational Note
-
-This virtual lab uses textbook RSA for educational visualization and mathematical clarity. It is designed for teaching and learning cryptography concepts.
