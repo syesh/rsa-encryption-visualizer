@@ -13,29 +13,6 @@ An interactive, web-based Cryptography Virtual Laboratory built with **Python** 
 - 🖥️ **Side-by-Side Workstation**: Real-time side-by-side terminal views for **Sender (Encryption)** and **Receiver (Decryption)** with KaTeX math rendering.
 - 📊 **Complete Transformation Matrix**: Comprehensive execution table tracking every character's journey with automated integrity verification (`🎉 Message Integrity Verified`).
 
----
-
-## 🧭 The 4-Step Guided Experience
-
-1. **🔑 Step 1: Key Generation & Setup**
-   - Configure prime numbers $p$ and $q$, and public exponent $e$.
-   - Derives modulus $n = p \times q$, totient $\phi(n) = (p-1)(q-1)$, Public Key $(e,n)$, and Private Key $(d,n)$.
-
-2. **💬 Step 2: Message Input & Encryption**
-   - Input custom plaintext message.
-   - View character ASCII numerical representation array and generated network ciphertext array.
-
-3. **🧪 Step 3: Interactive Stepper Visualizer**
-   - Step character-by-character through the encryption and decryption pipeline.
-   - Play/Pause timer auto-stepper.
-   - Side-by-side Sender & Receiver terminal cards displaying active character math and accumulating payload streams.
-
-4. **📊 Step 4: Full Summary Matrix & Verification**
-   - End-to-end transformation summary table for all characters.
-   - Live integrity verification badge.
-
----
-
 ## 🔑 RSA Algorithm Reference
 
 ### Key Derivation
