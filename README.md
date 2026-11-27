@@ -1,168 +1,92 @@
-# 🔐 RSA Cryptography Guided Experience & Visualizer
+# RSA Cryptography Guided Experience & Visualizer
 
-An interactive, web-based visual laboratory for exploring asymmetric public-key cryptography. Built with **Python**, **Streamlit**, and **WebAssembly (Stlite)**, this visualizer demonstrates how prime numbers, Euler's totient function, and modular arithmetic power RSA encryption and decryption in real time—with zero server configuration needed.
+An interactive web-based RSA cryptography visualizer built using **Python, Streamlit, and WebAssembly (Stlite)**. It demonstrates RSA key generation, encryption, and decryption through step-by-step visualizations, helping users understand the fundamentals of public-key cryptography.
 
----
+## 🌐 Live Demo
 
-## 🌟 Features
+**https://syesh.github.io/rsa-encryption-visualizer/**
 
-- **🔑 Dynamic Key Derivation**: Interactive prime selection ($p, q$) and public exponent ($e$) with instant validation, GCD calculations, and modular inverse derivation ($d$).
-- **⚡ Pre-Configured Presets**: Quick-load prime presets (`Small (11, 13)`, `Standard (61, 53)`, `Medium (131, 137)`, `Fast (17, 19)`, `Large (251, 257)`).
-- **💬 Dual-Workstation Transmission**: Visual simulation of two independent terminals:
-  - **Sender**: Plaintext $\rightarrow$ ASCII encoding $\rightarrow$ Modular exponentiation ($c = m^e \bmod n$).
-  - **Receiver**: Encrypted payload $\rightarrow$ Modular inverse exponentiation ($m = c^d \bmod n$) $\rightarrow$ ASCII decoding.
-- **🧪 Interactive Stepper & Auto-Play**: Step through encryption/decryption character-by-character with adjustable animation speed (0.2s - 2.0s).
-- **📊 Transformation Matrix**: Full ASCII conversion and ciphertext matrix with automated end-to-end message integrity verification.
-- **🌐 100% Serverless / Client-Side**: Powered by [Stlite](https://github.com/whitphx/stlite) (WebAssembly + Pyodide). Runs completely inside the user's browser with no backend server required.
+## ✨ Features
 
----
+- Interactive RSA key generation using prime numbers.
+- Automatic calculation of Euler's Totient Function and modular inverse.
+- Pre-configured prime number presets.
+- Step-by-step encryption and decryption.
+- Interactive sender and receiver workstations.
+- ASCII conversion and ciphertext visualization.
+- Auto-play mode with adjustable animation speed.
+- Message integrity verification.
+- Runs directly in the browser using WebAssembly, without requiring a backend server.
 
-## 🚀 Yes, You Can Deploy on GitHub Pages!
+## 🛠️ Technologies Used
 
-**Yes! Because this application runs entirely in the browser using WebAssembly via Stlite, it is 100% static and can be deployed directly to GitHub Pages for free.**
+- **Language:** Python
+- **Framework:** Streamlit
+- **WebAssembly:** Stlite, Pyodide
+- **Deployment:** GitHub Pages
+- **Version Control:** Git, GitHub
 
-### Option A: Standard GitHub Pages Deployment (2 Clicks)
+## 🧠 RSA Cryptography
 
-1. Push your repository to GitHub.
-2. Go to **Settings** $\rightarrow$ **Pages** in your GitHub repository.
-3. Under **Build and deployment**:
-   - **Source**: Select `Deploy from a branch`.
-   - **Branch**: Select `main` and `/ (root)`.
-4. Click **Save**.
-5. Wait 1-2 minutes—your visualizer will be live at:
-   ```
-   https://<your-username>.github.io/<repository-name>/
-   ```
+The visualizer demonstrates the following RSA operations:
 
-> **Note:** A `.nojekyll` file has already been added to the repository to ensure GitHub Pages serves `app.py` and all assets without Jekyll filtering.
+1. Select two prime numbers: \(p\) and \(q\).
+2. Calculate the modulus: \(n = p \times q\).
+3. Calculate Euler's Totient: \(\phi(n) = (p-1)(q-1)\).
+4. Select a valid public exponent \(e\).
+5. Derive the private exponent \(d\) using the Extended Euclidean Algorithm.
+6. Encrypt messages: \(c = m^e \bmod n\).
+7. Decrypt messages: \(m = c^d \bmod n\).
 
----
+**Note:** This project is intended for educational purposes. It uses small prime numbers to demonstrate RSA mathematical operations and is not suitable for securing real-world data.
 
-### Option B: GitHub Actions Workflow (Automated CI/CD)
+## 🚀 Getting Started
 
-An automated GitHub Actions workflow is provided at [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
-
-1. Go to **Settings** $\rightarrow$ **Pages** in your repository.
-2. Under **Build and deployment** $\rightarrow$ **Source**, choose **GitHub Actions**.
-3. Any push to `main` will automatically build and publish your site!
-
----
-
-## 💻 Local Development
-
-You can run the visualizer locally using either the standard Streamlit server or as a static WebAssembly web page.
-
-### Method 1: Using Streamlit (Python)
-
-1. Clone the repository and navigate into the folder:
-   ```bash
-   git clone https://github.com/<your-username>/<repository-name>.git
-   cd <repository-name>
-   ```
-
-2. Create and activate a virtual environment (optional but recommended):
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate    # On Windows: venv\Scripts\activate
-   ```
-
-3. Install requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Launch the application:
-   ```bash
-   streamlit run app.py
-   ```
-   Open `http://localhost:8501` in your browser.
-
----
-
-### Method 2: Pure Static / WebAssembly Mode
-
-Test the exact client-side WebAssembly build that runs on GitHub Pages:
+Clone the repository:
 
 ```bash
-# Python 3 built-in HTTP server
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+streamlit run app.py
+```
+
+Open `http://localhost:8501` in your browser.
+
+Alternatively, run the static WebAssembly version locally:
+
+```bash
 python3 -m http.server 8000
 ```
-Open `http://localhost:8000` in your browser.
 
----
+Then open `http://localhost:8000`.
 
-## 🧠 RSA Mathematical Foundation
+## 📂 Project Structure
 
-The visualizer implements textbook RSA asymmetric cryptography:
-
-1. **Prime Selection**: Pick two distinct prime numbers $p$ and $q$.
-2. **Modulus Calculation**:
-   $$n = p \times q$$
-3. **Euler's Totient**:
-   $$\phi(n) = (p - 1) \times (q - 1)$$
-4. **Public Key Selection ($e$)**:
-   Choose $e$ such that $1 < e < \phi(n)$ and $\gcd(e, \phi(n)) = 1$.
-   The **Public Key** is $(e, n)$.
-5. **Private Key Derivation ($d$)**:
-   Compute $d$ such that:
-   $$d \times e \equiv 1 \pmod{\phi(n)}$$
-   (Solved using the **Extended Euclidean Algorithm**).
-   The **Private Key** is $(d, n)$.
-6. **Encryption**:
-   For each character message $m$ (converted to its ASCII integer):
-   $$c = m^e \pmod n$$
-7. **Decryption**:
-   For each ciphertext integer $c$:
-   $$m = c^d \pmod n$$
-
-> ⚠️ **Educational Note**: This project uses small primes to clearly demonstrate the mathematical principles. Production RSA requires large primes (2048 to 4096 bits), cryptographically secure random number generators (CSPRNG), and optimal asymmetric encryption padding (RSA-OAEP) to protect against attacks.
-
----
-
-## 📁 Repository Structure
-
-```
+```text
 .
 ├── .github/
 │   └── workflows/
-│       └── deploy-pages.yml    # GitHub Actions workflow for GitHub Pages
 ├── .streamlit/
-│   └── config.toml             # Streamlit dark theme styling configuration
 ├── docs/
-│   └── PRESENTATION_DOCS.md    # Detailed slides & architecture explanation
-├── public/                     # Static distribution mirror
-│   ├── app.py
-│   ├── index.html
-│   └── .nojekyll
-├── .gitignore                  # Git ignore rules
-├── .nojekyll                   # Bypasses Jekyll on GitHub Pages
-├── .vercelignore               # Vercel deployment exclusions
-├── app.py                      # Main Streamlit application & RSA engine
-├── index.html                  # Stlite WebAssembly client mount
-├── LICENSE                     # MIT License
-├── PRESENTATION.md             # Quick slide presentation guide
-├── README.md                   # Project documentation
-├── requirements.txt            # Python dependencies
-└── vercel.json                 # Vercel deployment configuration
+├── public/
+├── app.py
+├── index.html
+├── requirements.txt
+├── PRESENTATION.md
+├── LICENSE
+└── README.md
 ```
-
----
-
-## 🌐 Other Deployment Options
-
-### Vercel Deployment
-This repository is pre-configured for Vercel using [`vercel.json`](vercel.json):
-1. Import the repository into [Vercel](https://vercel.com).
-2. Set Framework Preset to **Other** (Root directory: `.`).
-3. Deploy!
-
-### Streamlit Community Cloud
-1. Fork or push this repository to GitHub.
-2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io).
-3. Select your repository, set the branch to `main`, and specify `app.py` as the entry point.
-4. Deploy!
-
----
 
 ## 📄 License
 
